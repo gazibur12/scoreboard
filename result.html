@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🏆 Match Result</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+    .celebration {
+      font-size: 60px;
+      animation: bounce 1s infinite alternate, glow 2s infinite;
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #ff0, 0 0 10px #ff0, 0 0 20px #ff0; }
+      50% { text-shadow: 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0; }
+      100% { text-shadow: 0 0 5px #ff0, 0 0 10px #ff0, 0 0 20px #ff0; }
+    }
+    .score {
+      font-size: 20px;
+      margin-top: 30px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="resultHeading">🏆 Match Result</h1>
+  <div class="celebration" id="winnerText">🎉 Winner Team 🎉</div>
+  <div class="score" id="scoreDetails"></div>
+
+  <script>
+    const firstTeam = localStorage.getItem("teamName") || "Team 1";
+    const secondTeam = localStorage.getItem("secondInningTeamName") || "Team 2";
+    const firstScore = parseInt(localStorage.getItem("firstInningScore")) || 0;
+    const secondScore = parseInt(localStorage.getItem("secondInningScore")) || 0;
+
+    let winnerText = "";
+    if (firstScore > secondScore) {
+      winnerText = `🏆 ${firstTeam} Wins! 🏆`;
+    } else if (secondScore > firstScore) {
+      winnerText = `🏆 ${secondTeam} Wins! 🏆`;
+    } else {
+      winnerText = "🤝 Match Draw 🤝";
+    }
+
+    document.getElementById("winnerText").innerText = winnerText;
+    document.getElementById("scoreDetails").innerHTML = `
+      ${firstTeam}: ${firstScore} runs<br>
+      ${secondTeam}: ${secondScore} runs
+    `;
+  </script>
+
+</body>
+</html>
